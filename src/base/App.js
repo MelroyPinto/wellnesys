@@ -59,7 +59,7 @@ const App = (props) => {
   };
 
   useEffect(() => {
-    if(isMobile) return setFocus(0); else setFocus(1);
+    if(isMobile) return;
     document.addEventListener("keydown", moveFocus);
     moveFocus();
     return () => document.removeEventListener("keydown", moveFocus);

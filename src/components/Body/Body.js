@@ -4,7 +4,8 @@ import style from "./Body.module.scss";
 import cx from "classnames";
 import IMAGES from "src/assets";
 
-const Body = ({ focus, childFocus }) => {
+const Body = ({ focus, childFocus, isMobile }) => {
+  focus = isMobile ? 0 : focus;
   return (
     <section className={style.sectionBody}>
       <div className={style.sectionTwo}>

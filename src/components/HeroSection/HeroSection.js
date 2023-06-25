@@ -4,7 +4,8 @@ import style from "./HeroSection.module.scss";
 import cx from "classnames";
 import IMAGES from "src/assets";
 
-const HeroSection = ({ focus }) => {
+const HeroSection = ({ focus, isMobile }) => {
+  focus = isMobile ? 0 : focus;
   return (
     <section
       className={style.heroImgSection}
