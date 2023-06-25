@@ -55,15 +55,18 @@ export const FOCUS = [
     focus: 1,
     child: [],
     hasChildren: false,
+    uniqName: ''
   },
   {
     focus: 2,
     child: [{ focus: 1 }, { focus: 2 }, { focus: 3 }, { focus: 4 }],
     hasChildren: true,
+    uniqName: 'cards'
   },
   {
     focus: 3,
     child: [],
     hasChildren: false,
+    uniqName: ''
   },
 ];

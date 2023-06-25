@@ -38,10 +38,7 @@ const App = () => {
         break; //down
       case 37:
         setChildFocus((childFocus) => {
-          if (
-            FOCUS[focus].hasChildren &&
-            childFocus > 1
-          ) {
+          if (FOCUS[focus].hasChildren && childFocus > 1) {
             return childFocus - 1;
           }
           return childFocus;
@@ -66,6 +63,16 @@ const App = () => {
     moveFocus();
     return () => document.removeEventListener("keydown", moveFocus);
   }, []);
+
+  useEffect(() => {
+    const id = `${FOCUS[focus - 1].uniqName}${focus}${childFocus}`;
+    const ele = document.getElementById(id);
+    ele?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "end",
+    });
+  }, [childFocus]);
 
   const renderHero = () => {
     return (
@@ -106,6 +113,7 @@ const App = () => {
           <div className={style.carouselContainer}>
             {CARDS.map(({ key, title, subtitle, img }, i) => (
               <button
+                id={`${FOCUS[1].uniqName}${FOCUS[1].focus}${i + 1}`}
                 className={cx(
                   style.card,
                   focus === 2 && childFocus === i + 1 && style.focus
