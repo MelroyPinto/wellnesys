@@ -1,9 +1,71 @@
 import IMAGES from "src/assets";
 import style from "./app.module.scss";
 import { ArrowLeftOutlined, CaretRightOutlined } from "@ant-design/icons";
-import { CARDS, TEXT_CARDS } from "src/utils/common";
+import { CARDS, FOCUS, TEXT_CARDS } from "src/utils/common";
+import cx from "classnames";
+import { useEffect, useState } from "react";
 
 const App = () => {
+  const [focus, setFocus] = useState(1);
+  const [childFocus, setChildFocus] = useState(1);
+
+  const moveFocus = (e) => {
+    e?.preventDefault();
+    if (!e) {
+      return;
+    }
+    const { keyCode } = e;
+
+    switch (keyCode) {
+      case 38:
+        setFocus((focus) => {
+          if (focus > 1) {
+            return focus - 1;
+          }
+          return focus;
+        });
+        setChildFocus(1);
+        break; //up
+      case 40:
+        setFocus((focus) => {
+          if (focus < 3) {
+            return focus + 1;
+          }
+          return focus;
+        });
+        setChildFocus(1);
+        break; //down
+      case 37:
+        setChildFocus((childFocus) => {
+          if (
+            FOCUS[focus].hasChildren &&
+            childFocus > 1
+          ) {
+            return childFocus - 1;
+          }
+          return childFocus;
+        });
+        break; //left
+      case 39:
+        setChildFocus((childFocus) => {
+          if (
+            FOCUS[focus].hasChildren &&
+            childFocus < FOCUS[focus].child.length
+          ) {
+            return childFocus + 1;
+          }
+          return childFocus;
+        });
+        break; //right
+      default:
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("keydown", moveFocus);
+    moveFocus();
+    return () => document.removeEventListener("keydown", moveFocus);
+  }, []);
+
   const renderHero = () => {
     return (
       <section
@@ -21,7 +83,7 @@ const App = () => {
         <div className={style.btnContainer}>
           <button
             type="button"
-            className={style.playBtn}
+            className={cx(style.playBtn, focus === 1 && style.focus)}
             title="Play"
             tabIndex={2}
           >
@@ -35,14 +97,18 @@ const App = () => {
       </section>
     );
   };
-  const renderCarousel = () => {
+
+  const renderBody = () => {
     return (
       <section className={style.sectionBody}>
         <div className={style.sectionTwo}>
           <div className={style.carouselContainer}>
-            {CARDS.map(({ key, title, subtitle, img }) => (
+            {CARDS.map(({ key, title, subtitle, img }, i) => (
               <button
-                className={style.card}
+                className={cx(
+                  style.card,
+                  focus === 2 && childFocus === i + 1 && style.focus
+                )}
                 key={key}
                 style={{ backgroundImage: `url(${img})` }}
               >
@@ -56,7 +122,9 @@ const App = () => {
         </div>
         <div className={style.sectionThree}>
           <div className={style.startBtnContainer}>
-            <button type="button">Start Session</button>
+            <button type="button" className={cx(focus === 3 && style.focus)}>
+              Start Session
+            </button>
           </div>
           <div className={style.contentDetails}>
             <img src={IMAGES.yogaCard} alt="img-yoga"></img>
@@ -66,11 +134,11 @@ const App = () => {
               <p>Teaching Hours: 12000</p>
             </div>
           </div>
-          <p className={`${style.desc} ${style.mb_2}`}>
+          <p className={cx(style.desc, style.mb_2)}>
             This is simply dummy text of the printing and typesetting industry.
           </p>
           <hr />
-          <p className={`${style.desc} ${style.mt_2} ${style.mb_2}`}>
+          <p className={cx(style.desc, style.mt_2, style.mb_2)}>
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500s, when an unknown printer took a galley of type
@@ -100,7 +168,7 @@ const App = () => {
   return (
     <>
       {renderHero()}
-      {renderCarousel()}
+      {renderBody()}
     </>
   );
 };

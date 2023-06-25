@@ -262,5 +262,17 @@
 
 .sectionBody {
   height: calc(100vh);
-  background-color: #0d1223;
+  background: rgb(10, 17, 35);
+  background: linear-gradient(
+    180deg,
+    rgba(10, 17, 35, 1) 14%,
+    rgba(41, 104, 83, 1) 36%,
+    rgba(13, 50, 109, 1) 62%
+  );
+}
+
+.focus {
+  transform: scale(1.05);
+  border: 2px solid #4482fe;
+  transition: all 0.1s ease-in-out;
 }

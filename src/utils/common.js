@@ -31,7 +31,7 @@ export const TEXT_CARDS = [
   {
     key: 1,
     headerText: "Benefits",
-    color: '#0ac3dd',
+    color: "#0ac3dd",
     list: [
       { key: 1, content: "Yoga improves strength, balance & flexibility" },
       { key: 2, content: "Yoga helps with back pain relief" },
@@ -39,13 +39,31 @@ export const TEXT_CARDS = [
     ],
   },
   {
-    key: 1,
+    key: 2,
     headerText: "Caution",
-    color: '#c67923',
+    color: "#c67923",
     list: [
       { key: 1, content: "Yoga improves strength, balance & flexibility" },
       { key: 2, content: "Yoga helps with back pain relief" },
       { key: 3, content: "Yoga can ease arthritis symptoms" },
     ],
+  },
+];
+
+export const FOCUS = [
+  {
+    focus: 1,
+    child: [],
+    hasChildren: false,
+  },
+  {
+    focus: 2,
+    child: [{ focus: 1 }, { focus: 2 }, { focus: 3 }, { focus: 4 }],
+    hasChildren: true,
+  },
+  {
+    focus: 3,
+    child: [],
+    hasChildren: false,
   },
 ];
