@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 import Body from "src/components/Body/Body";
 import HeroSection from "src/components/HeroSection/HeroSection";
 
-const App = () => {
+const App = (props) => {
+  const { isMobile } = props;
   const [focus, setFocus] = useState(1);
   const [childFocus, setChildFocus] = useState(1);
 
   const moveFocus = (e) => {
     e?.preventDefault();
+    if (isMobile) return;
     if (!e) {
       return;
     }
@@ -57,10 +59,11 @@ const App = () => {
   };
 
   useEffect(() => {
+    if(isMobile) return setFocus(0); else setFocus(1);
     document.addEventListener("keydown", moveFocus);
     moveFocus();
     return () => document.removeEventListener("keydown", moveFocus);
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     const id = `${FOCUS[focus - 1].uniqName}${focus}${childFocus}`;
@@ -72,11 +75,12 @@ const App = () => {
     });
   }, [childFocus]);
 
-  const props = { focus, childFocus };
+  const newProps = { focus, childFocus, ...props };
+
   return (
     <>
-      <HeroSection {...props} />
-      <Body {...props} />
+      <HeroSection {...newProps} />
+      <Body {...newProps} />
     </>
   );
 };
