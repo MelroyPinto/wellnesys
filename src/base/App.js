@@ -25,7 +25,6 @@ const App = () => {
           }
           return focus;
         });
-        setChildFocus(1);
         break; //up
       case 40:
         setFocus((focus) => {
@@ -34,7 +33,6 @@ const App = () => {
           }
           return focus;
         });
-        setChildFocus(1);
         break; //down
       case 37:
         setChildFocus((childFocus) => {
