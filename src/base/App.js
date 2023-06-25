@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import IMAGES from "src/assets";
 import style from "./app.module.scss";
 import { ArrowLeftOutlined, CaretRightOutlined } from "@ant-design/icons";
