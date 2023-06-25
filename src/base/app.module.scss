@@ -239,28 +239,28 @@
       color: var(--color-light);
       font-size: 1rem;
       margin-bottom: 1rem;
+      gap: 1rem;
     }
   }
 }
 
 .bulletIcon {
-  height: 0.7rem;
-  width: 0.7rem;
+  height: 10px;
+  width: 10px;
   border: 2px solid var(--color-light);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 0.5rem;
   & span {
-    height: 0.3rem;
-    width: 0.3rem;
+    height: 4px;
+    width: 4px;
     background-color: var(--color-light);
     border-radius: 50%;
   }
 }
 
 .sectionBody {
-  height: calc(100vh - 15rem);
+  height: calc(100vh);
   background-color: #0d1223;
 }
